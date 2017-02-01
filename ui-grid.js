@@ -6002,19 +6002,28 @@ angular.module('ui.grid')
           if(typeof filter.term == 'object') {
             for(var key in filter.term) {
 
-              /* Special cases for ui slider being a filter inputg */
-              if(key == 'min') {
-                filter.term[key] = 0;
+              /* For objects, a default value is settable like for example a slider as a filter
+               * filter: {
+                   sliderOptions: { ...
+                   },
+               term: {
+                min: 0,
+                max: 999,
+                minDefaultAfterClearFilter: 0,
+                maxDefaultAfterClearFilter: 999
+              },
+               * 
+              * */
+              
+              /* Do not change default values when reset filters */
+              if(key.endsWith('DefaultAfterClearFilter')) {
+                continue;
               }
 
-              else if(key == 'max') {
-                filter.term[key] = 999;
+              /* Check if there is a default setting for current property: If yes, set its value instead of deleting value */
+              if(filter.term.hasOwnProperty(key + 'DefaultAfterClearFilter')) {
+                filter.term[key] = filter.term[key + 'DefaultAfterClearFilter'];
               }
-
-              else if(typeof filter.term[key] == 'number') {
-                filter.term[key] = 0;
-              }
-
               else {
                 filter.term[key] = undefined;
               }

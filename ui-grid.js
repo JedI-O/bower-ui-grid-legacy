@@ -2182,7 +2182,6 @@ angular.module('ui.grid').directive('uiGridCell', ['$compile', '$parse', 'gridUt
                             };
 
                             $scope.itemAction = function($event,title) {
-                                gridUtil.logDebug('itemAction');
                                 $event.stopPropagation();
 
                                 if (typeof($scope.action) === 'function') {
@@ -6022,7 +6021,7 @@ angular.module('ui.grid').directive('uiGridCell', ['$compile', '$parse', 'gridUt
                                      * */
 
                                     /* Do not change default values when reset filters */
-                                    if(key.endsWith('DefaultAfterClearFilter')) {
+                                    if( _.endsWith(key,'DefaultAfterClearFilter') /* Lodash required at this moment! TODO: Solve when using for projects without lodash */ ) {
                                         continue;
                                     }
 

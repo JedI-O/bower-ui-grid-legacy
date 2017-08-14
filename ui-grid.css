@@ -1867,7 +1867,7 @@ select[multiple].ui-grid-pager-row-count-picker select {
 */
 /*-- END VARIABLES (DO NOT REMOVE THESE COMMENTS) --*/
 .ui-grid-tree-header-row {
-  font-weight: bold !important;
+  font-weight: bold;
 }
 
 .ui-grid-icon-plus-squared:before {
